@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <Button
+        android:id="@+id/lyTraining1"
+        android:layout_margin="40dp"
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_height="240dp"
+        android:drawableLeft="@drawable/ic_baseline_person_24"
+        android:text="Индивидуальная"
+        android:textSize="20sp">
+    </Button>
+
+    <Button
+        android:id="@+id/lyTraining2"
+        android:layout_margin="40dp"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_height="240dp"
+        android:drawableLeft="@drawable/ic_baseline_people_24"
+        android:text="Командная"
+        android:textSize="20sp"
+        />
+
+
+</RelativeLayout>

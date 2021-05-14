@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Cyber Play</string>
+    <!-- TODO: Bottom Menu Item -->
+    <string name="title_nades">Гранаты</string>
+    <string name="title_board">Доска</string>
+    <string name="title_train">Тренировки</string>
+    <!-- TODO: Action Bar Item -->
+    <string name="title_profile">Профиль</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- TODO:  -->
+</resources>
