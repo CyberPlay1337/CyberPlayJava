@@ -1,26 +1,45 @@
 package ru.startandroid.develop.cyberplayjava;
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.MediaController;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class FragmentItemTrainings extends Fragment {
 
     ArrayList<StateTraining> states = new ArrayList();
     ListView trainingList;
+    int choosenStateId;
 
-    public FragmentItemTrainings() {}
+    public FragmentItemTrainings(int id) {
+        choosenStateId = id;
+    }
+
+    public FragmentItemTrainings()
+    {}
+
 
     public static FragmentItemTrainings newInstance() {
         return new FragmentItemTrainings();
@@ -36,28 +55,69 @@ public class FragmentItemTrainings extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_item_training, container, false);
-        setInitialData();
-        trainingList = (ListView) root.findViewById(R.id.trainingList);
-        // создаем адаптер
-        StateTrainingAdapter stateAdapter = new StateTrainingAdapter(root.getContext(), R.layout.list_item_training, states);
-        trainingList.setAdapter(stateAdapter);
 
-        AdapterView.OnItemClickListener itemListener = new AdapterView.OnItemClickListener() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://raw.githubusercontent.com/CyberPlay1337/CyberPlayJson/main/") // URL to Server
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        MessagesApi messagesApi = retrofit.create(MessagesApi.class);
+        Call<List<MessageTraining>> call;
+        switch (choosenStateId)
+        {
+            case 0:
+                call = messagesApi.messagesSoloTraining();
+                break;
+            case 1:
+                call = messagesApi.messagesTeamTraining();
+                break;
+            default:
+                call = messagesApi.messagesSoloTraining();
+                break;
+
+        }
+        call.enqueue(new Callback<List<MessageTraining>>() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+            public void onResponse(Call<List<MessageTraining>> call, Response<List<MessageTraining>> response) {
 
-                // получаем выбранный пункт
-                StateTraining selectedState = (StateTraining)parent.getItemAtPosition(position);
+                List<MessageTraining> messages = response.body();
+                for (MessageTraining mes : messages)
+                {
+                    Log.i("Retrofit-add", "Adding");
+                    setInitialData(mes.getName(),mes.getImgLink(),mes.getText());
+                }
 
-                Toast.makeText(getActivity(),"Был выбран пункт " + selectedState.getName(),
-                        Toast.LENGTH_SHORT).show();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fl_content, new FragmentInfoTraining(selectedState));
-                fragmentTransaction.commit();
+                trainingList = (ListView) root.findViewById(R.id.trainingList);
+                // создаем адаптер
+                StateTrainingAdapter stateAdapter = new StateTrainingAdapter(root.getContext(), R.layout.list_item_training, states);
+                trainingList.setAdapter(stateAdapter);
+
+                AdapterView.OnItemClickListener itemListener = new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+
+                        // получаем выбранный пункт
+                        StateTraining selectedState = (StateTraining)parent.getItemAtPosition(position);
+
+                        Toast.makeText(getActivity(),"Был выбран пункт " + selectedState.getName(),
+                                Toast.LENGTH_SHORT).show();
+                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.fl_content, new FragmentInfoTraining(selectedState));
+                        fragmentTransaction.commit();
+                    }
+                };
+                trainingList.setOnItemClickListener(itemListener);
             }
-        };
-        trainingList.setOnItemClickListener(itemListener);
+
+
+            @Override
+            public void onFailure(Call<List<MessageTraining>> call, Throwable t) {
+
+            }
+        });
+
+
+
         return root;
 
     }
@@ -68,10 +128,7 @@ public class FragmentItemTrainings extends Fragment {
     }
 
 
-    private void setInitialData(){
-        states.clear();
-        states.add(new StateTraining("Aim",  "https://sun9-57.userapi.com/impg/sf663OVYdPk0TOPnTIzHZs06S4_Q4x9CbDpaGg/HWdcIo1prJY.jpg?size=1080x1080&quality=96&sign=ae5ea0f5e4b954ccfca0a1c57348d8c2&type=album"));
-        states.add(new StateTraining("Aim by s1mple",  "https://sun9-57.userapi.com/impg/sf663OVYdPk0TOPnTIzHZs06S4_Q4x9CbDpaGg/HWdcIo1prJY.jpg?size=1080x1080&quality=96&sign=ae5ea0f5e4b954ccfca0a1c57348d8c2&type=album"));
-        states.add(new StateTraining("Индивидуальная тренировка",  "https://sun9-57.userapi.com/impg/sf663OVYdPk0TOPnTIzHZs06S4_Q4x9CbDpaGg/HWdcIo1prJY.jpg?size=1080x1080&quality=96&sign=ae5ea0f5e4b954ccfca0a1c57348d8c2&type=album"));
+    private void setInitialData(String name, String imgLink, String text){
+        states.add(new StateTraining(name,imgLink,text));
     }
 }

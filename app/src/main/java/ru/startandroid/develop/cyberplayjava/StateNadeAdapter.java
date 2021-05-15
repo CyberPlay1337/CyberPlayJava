@@ -30,8 +30,9 @@ public class StateNadeAdapter extends RecyclerView.Adapter<StateNadeAdapter.View
     @Override
     public void onBindViewHolder(StateNadeAdapter.ViewHolder holder, int position) {
         StateNade state = states.get(position);
-        holder.nadeResource.setImageResource(state.getNadeResource());
+        // holder.nadeResource.setImageResource(state.getNadeResource());
         holder.name.setText(state.getName());
+        new DownloadImageTask(holder.nadeResource).execute(state.getNadeResource());
     }
 
     @Override

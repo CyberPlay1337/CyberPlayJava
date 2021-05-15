@@ -61,7 +61,7 @@ public class FragmentNades extends Fragment {
                         Toast.LENGTH_SHORT).show();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fl_content, new FragmentItemNades());
+                fragmentTransaction.replace(R.id.fl_content, new FragmentItemNades(selectedState.getName()));
                 fragmentTransaction.commit();
             }
         };

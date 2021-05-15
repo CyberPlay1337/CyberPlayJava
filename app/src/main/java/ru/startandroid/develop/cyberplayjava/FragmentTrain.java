@@ -46,14 +46,14 @@ public class FragmentTrain extends Fragment {
         ly1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fragmentTransaction.replace(R.id.fl_content, new FragmentItemTrainings());
+                fragmentTransaction.replace(R.id.fl_content, new FragmentItemTrainings(0));
                 fragmentTransaction.commit();
             }
         });
         ly2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fragmentTransaction.replace(R.id.fl_content, new FragmentItemTrainings());
+                fragmentTransaction.replace(R.id.fl_content, new FragmentItemTrainings(1));
                 fragmentTransaction.commit();
             }
         });

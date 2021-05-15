@@ -41,7 +41,9 @@ public class FragmentInfoTraining extends Fragment {
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_info_train, container, false);
         TextView title = root.findViewById(R.id.titleTraining);
+        TextView text = root.findViewById(R.id.textTraining);
         title.setText(stateTraining.getName());
+        text.setText(stateTraining.getText());
         ImageView iv = root.findViewById(R.id.titleImg);
         new DownloadImageTask(iv).execute(stateTraining.getImgLink());
 
