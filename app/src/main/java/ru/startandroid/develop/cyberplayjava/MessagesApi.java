@@ -29,7 +29,7 @@ public interface MessagesApi {
     Call<List<Message>> messagesNuke();
 
 
-    @GET("SoloTraining.json")
+    @GET("soloTraining.json")
     Call<List<MessageTraining>> messagesSoloTraining();
 
     @GET("TeamTraining.json")
