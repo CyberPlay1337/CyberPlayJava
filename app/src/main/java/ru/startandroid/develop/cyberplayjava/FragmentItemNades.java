@@ -12,9 +12,14 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,10 +60,15 @@ public class FragmentItemNades extends Fragment{
 
         View root = inflater.inflate(R.layout.fragment_item_nade, container, false);
 
-        VideoView videoView = (VideoView) root.findViewById(R.id.videoPlayer);
+        // VideoView videoView = (VideoView) root.findViewById(R.id.videoPlayer);
+        YouTubePlayerView youTubePlayerView = root.findViewById(R.id.youtube_player_view);
+        getLifecycle().addObserver(youTubePlayerView);
+
+
+
 
        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://raw.githubusercontent.com/CyberPlay1337/CyberPlayJson/main/") // URL to Server
+                .baseUrl("http://10.0.2.2:80/api/nadeMaps/") // URL to Server
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         MessagesApi messagesApi = retrofit.create(MessagesApi.class);
@@ -113,11 +123,16 @@ public class FragmentItemNades extends Fragment{
                             @Override public void onItemClick(View view, int position) {
 
                                 StateNade sn = (StateNade) states.get(position);
-                                videoView.setVideoURI(Uri.parse(sn.getVideoLink()));
-                                Toast.makeText(getActivity(),"Был выбран пункт " + sn.getName() ,Toast.LENGTH_SHORT).show();
-                                videoView.setMediaController( new MediaController(root.getContext()));
+                                // videoView.setVideoURI(Uri.parse(sn.getVideoLink()));
 
-                                videoView.start();
+                                Toast.makeText(getActivity(),"Был выбран пункт " + sn.getName() ,Toast.LENGTH_SHORT).show();
+                                // videoView.setMediaController( new MediaController(root.getContext()));
+
+                                // videoView.start();
+
+                                youTubePlayerView.getYouTubePlayerWhenReady(youTubePlayer -> {
+                                    youTubePlayer.loadVideo(sn.getVideoLink(),0);
+                                });
                             }
 
                             @Override public void onLongItemClick(View view, int position) {
@@ -130,7 +145,7 @@ public class FragmentItemNades extends Fragment{
 
             @Override
             public void onFailure(Call<List<Message>> call, Throwable t) {
-
+                Log.i("Retrofit-add", t.getMessage());
             }
         });
 

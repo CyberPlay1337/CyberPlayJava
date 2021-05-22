@@ -7,25 +7,25 @@ import retrofit2.http.GET;
 
 public interface MessagesApi {
 
-    @GET("NadesDust2.json")
+    @GET("Dust2.php")
     Call<List<Message>> messagesDust2();
 
-    @GET("NadesInferno.json")
+    @GET("Inferno.php")
     Call<List<Message>> messagesInferno();
 
-    @GET("NadesMirage.json")
+    @GET("Mirage.php")
     Call<List<Message>> messagesMirage();
 
-    @GET("NadesTrain.json")
+    @GET("Ancient.php")
     Call<List<Message>> messagesTrain();
 
-    @GET("NadesOverpass.json")
+    @GET("Overpass.php")
     Call<List<Message>> messagesOverpass();
 
-    @GET("NadesVertigo.json")
+    @GET("Vertigo.php")
     Call<List<Message>> messagesVertigo();
 
-    @GET("NadesNuke.json")
+    @GET("Nuke.php")
     Call<List<Message>> messagesNuke();
 
 
