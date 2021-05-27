@@ -110,7 +110,7 @@ public class FragmentItemNades extends Fragment{
                 List<Message> messages = response.body();
                 for (Message mes : messages)
                 {
-                    Log.i("Retrofit-add", "Adding");
+                    // Log.i("Retrofit-add", "Adding");
                     setInitialData(mes.getName(),mes.getNadeResource(),mes.getVideoLink());
                 }
 
@@ -145,7 +145,7 @@ public class FragmentItemNades extends Fragment{
 
             @Override
             public void onFailure(Call<List<Message>> call, Throwable t) {
-                Log.i("Retrofit-add", t.getMessage());
+                // Log.i("Retrofit-add", t.getMessage());
             }
         });
 

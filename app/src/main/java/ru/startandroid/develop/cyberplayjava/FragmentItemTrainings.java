@@ -82,7 +82,7 @@ public class FragmentItemTrainings extends Fragment {
                 List<MessageTraining> messages = response.body();
                 for (MessageTraining mes : messages)
                 {
-                    Log.i("Retrofit-add", "Adding");
+                    // Log.i("Retrofit-add", "Adding");
                     setInitialData(mes.getName(),mes.getImgLink(),mes.getText());
                 }
 

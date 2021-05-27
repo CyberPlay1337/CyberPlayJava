@@ -3,7 +3,9 @@ package ru.startandroid.develop.cyberplayjava;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 
 public interface MessagesApi {
 
@@ -34,5 +36,14 @@ public interface MessagesApi {
 
     @GET("TeamTraining.json")
     Call<List<MessageTraining>> messagesTeamTraining();
+
+    @POST("jwt_login.php")
+    Call<LoginResponse> loginUser(@Body User user);
+
+    @POST("jwt_validate.php")
+    Call<ValidateResponse> validateUser(@Body ValidateUser key_jwt);
+
+    @POST("create_user.php")
+    Call<ValidateResponse> createUser(@Body User user);
 
 }

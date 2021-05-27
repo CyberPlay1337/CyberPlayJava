@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,6 +22,12 @@ import com.google.android.gms.ads.initialization.OnInitializationCompleteListene
 import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                 // The mInterstitialAd reference will be null until
                 // an ad is loaded.
                 mInterstitialAd = interstitialAd;
-                Log.i("AdMob", "onAdLoaded");
+                // Log.i("AdMob", "onAdLoaded");
             }
 
             @Override
@@ -89,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
         if (mInterstitialAd != null) {
             mInterstitialAd.show(MainActivity.this);
         } else {
-            Log.d("TAG", "The interstitial ad wasn't ready yet.");
+            // Log.d("TAG", "The interstitial ad wasn't ready yet.");
         }
     }
 
@@ -101,7 +109,46 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                loadFragment(FragmentProfile.newInstance(),true);
+
+                SharedPreferences myPreferences
+                        = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+                String local_jwtKey = myPreferences.getString("jwt", "unknown");
+                // Log.d("ret",local_jwtKey);
+                if(local_jwtKey.equals("unknown"))
+                {
+                    loadFragment(FragmentProfileSignInUp.newInstance(),true);
+                }
+                else
+                {
+                    // loadFragment(FragmentProfileSignInUp.newInstance(),true);
+                    Retrofit retrofit = new Retrofit.Builder()
+                            .baseUrl("http://10.0.2.2:80/api/")
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build();
+                    MessagesApi messagesApi = retrofit.create(MessagesApi.class);
+                    Call<ValidateResponse> call = messagesApi.validateUser(new ValidateUser(local_jwtKey));
+                    call.enqueue(new Callback<ValidateResponse>() {
+                        @Override
+                        public void onResponse(Call<ValidateResponse> call, Response<ValidateResponse> response) {
+                            if(response.isSuccessful()) {
+                                if (response.body().getMessage().equals("Access allowed.")) {
+                                    loadFragment(FragmentProfile.newInstance(),true);
+                                } else {
+                                    loadFragment(FragmentProfileSignInUp.newInstance(),true);
+                                }
+                            }
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<ValidateResponse> call, Throwable t) {
+
+                        }
+                    });
+
+
+                }
+
                 return true;
             }
         });
