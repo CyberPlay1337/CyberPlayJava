@@ -57,7 +57,7 @@ public class FragmentItemTrainings extends Fragment {
         View root = inflater.inflate(R.layout.fragment_item_training, container, false);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:80/api/trainings/") // URL to Server
+                .baseUrl("http://94.228.115.44:80/api/trainings/") // URL to Server
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         MessagesApi messagesApi = retrofit.create(MessagesApi.class);

@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 public class StateNadeAdapter extends RecyclerView.Adapter<StateNadeAdapter.ViewHolder> {
@@ -30,9 +32,11 @@ public class StateNadeAdapter extends RecyclerView.Adapter<StateNadeAdapter.View
     @Override
     public void onBindViewHolder(StateNadeAdapter.ViewHolder holder, int position) {
         StateNade state = states.get(position);
-        // holder.nadeResource.setImageResource(state.getNadeResource());
+        // holder.nadeResource.setImageResource(R.drawable.oneway);
+        Picasso.get().load(state.getNadeResource()).into(holder.nadeResource);
         holder.name.setText(state.getName());
-        new DownloadImageTask(holder.nadeResource).execute(state.getNadeResource());
+        //new DownloadImageTask(holder.nadeResource).execute(state.getNadeResource());
+
     }
 
     @Override
@@ -41,8 +45,8 @@ public class StateNadeAdapter extends RecyclerView.Adapter<StateNadeAdapter.View
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        final ImageView nadeResource;
-        final TextView name;
+        public ImageView nadeResource;
+        public TextView name;
         ViewHolder(View view){
             super(view);
             nadeResource = (ImageView)view.findViewById(R.id.nadeImg);

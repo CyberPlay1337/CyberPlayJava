@@ -1,12 +1,14 @@
 package ru.startandroid.develop.cyberplayjava;
 
 public class StateNade {
+    private String id;
     private String name; // название
-    private String  videoLink;
+    private String videoLink;
     private String nadeResource; // ресурс флага
 
-    public StateNade(String name, String nadeResource, String link)
+    public StateNade(String id,String name, String nadeResource, String link)
     {
+        this.id = id;
         this.name = name;
         this.nadeResource = nadeResource;
         this.videoLink = link;
@@ -22,4 +24,11 @@ public class StateNade {
     public String getVideoLink() {return this.videoLink;}
     public void setVideoLink(String link) {this.videoLink = link;}
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }

@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,6 +41,7 @@ public class FragmentProfile extends Fragment {
         TextView tvProfileNickName = root.findViewById(R.id.profileNickName);
         Button btnFavNades = root.findViewById(R.id.profileBtnFavNades);
         Button btnLogOut = root.findViewById(R.id.profileBtnLogOut);
+        Button btnOneWay = root.findViewById(R.id.profileBtnOneWay);
 
         SharedPreferences myPreferences
                 = PreferenceManager.getDefaultSharedPreferences(root.getContext());
@@ -58,6 +60,27 @@ public class FragmentProfile extends Fragment {
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fl_content, FragmentProfileSignInUp.newInstance());
+                fragmentTransaction.commit();
+            }
+        });
+
+        btnOneWay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fl_content, new FragmentItemNades ("OneWay"));
+                fragmentTransaction.commit();
+            }
+        });
+
+        btnFavNades.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fl_content, new FragmentItemNades("FavNades"));
                 fragmentTransaction.commit();
             }
         });

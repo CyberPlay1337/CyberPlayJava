@@ -30,6 +30,12 @@ public interface MessagesApi {
     @GET("Nuke.php")
     Call<List<Message>> messagesNuke();
 
+    @GET("OneWay.php")
+    Call<List<Message>> messagesOneWay();
+
+    @POST("FavNades.php")
+    Call<List<Message>> messagesFavNades(@Body ValidateUser key_jwt);
+
 
     @GET("soloTraining.json")
     Call<List<MessageTraining>> messagesSoloTraining();
@@ -46,4 +52,6 @@ public interface MessagesApi {
     @POST("create_user.php")
     Call<ValidateResponse> createUser(@Body User user);
 
+    @POST("add_fav_nades.php")
+    Call<ValidateResponse> addFavNade(@Body VFavNade favNade);
 }

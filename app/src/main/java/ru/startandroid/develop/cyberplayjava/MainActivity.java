@@ -121,8 +121,8 @@ public class MainActivity extends AppCompatActivity {
                 else
                 {
                     // loadFragment(FragmentProfileSignInUp.newInstance(),true);
-                    Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl("http://10.0.2.2:80/api/")
+                  /*  Retrofit retrofit = new Retrofit.Builder()
+                            .baseUrl("http://94.228.115.44:80/api/")
                             .addConverterFactory(GsonConverterFactory.create())
                             .build();
                     MessagesApi messagesApi = retrofit.create(MessagesApi.class);
@@ -145,8 +145,8 @@ public class MainActivity extends AppCompatActivity {
 
                         }
                     });
-
-
+                    */
+                    loadFragment(FragmentProfile.newInstance(),true);
                 }
 
                 return true;

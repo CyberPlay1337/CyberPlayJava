@@ -20,9 +20,9 @@
         android:layout_width="160dp"
         android:layout_height="match_parent"
         android:textAlignment="center"
-        android:text="Smoke"
+        android:text=""
         android:textColor="@color/white"
-        android:textSize="24sp"
+        android:textSize="18sp"
         android:background="@color/backGroundColor"
         app:layout_constraintTop_toBottomOf="@id/nadeImg"
         app:layout_constraintRight_toRightOf="parent" />

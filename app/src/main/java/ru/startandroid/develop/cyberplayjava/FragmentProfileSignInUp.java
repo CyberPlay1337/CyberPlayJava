@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -48,7 +49,7 @@ public class FragmentProfileSignInUp extends Fragment {
 
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:80/api/")
+                .baseUrl("http://94.228.115.44:80/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -112,6 +113,7 @@ public class FragmentProfileSignInUp extends Fragment {
                                     myEditor.putString("login",etLogin.getText().toString());
                                     myEditor.commit();
 
+
                                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                                     fragmentTransaction.replace(R.id.fl_content, FragmentProfile.newInstance());
@@ -120,7 +122,8 @@ public class FragmentProfileSignInUp extends Fragment {
                                 }
                                 else
                                 {
-                                    // Log.d("ret", "Status : not logined");
+                                    Toast.makeText(getActivity(),"Wrong login or password!",
+                                            Toast.LENGTH_SHORT).show();
                                 }
                             }else{
                                 // Log.d("ret", "LoginResponse : isFalse");
@@ -134,7 +137,7 @@ public class FragmentProfileSignInUp extends Fragment {
                     });
                 }
                 else {
-                    if (etPassword.getText().toString().equals(etConfirmPassword.getText().toString())) {
+                    if (etPassword.getText().toString().equals(etConfirmPassword.getText().toString()) && etLogin.length() >= 4 && etPassword.length() >= 8) {
                         MessagesApi messagesApi = retrofit.create(MessagesApi.class);
                         Call<ValidateResponse> call = messagesApi.createUser(new User(etLogin.getText().toString(), etPassword.getText().toString()));
                         call.enqueue(new Callback<ValidateResponse>() {
@@ -186,7 +189,7 @@ public class FragmentProfileSignInUp extends Fragment {
 
                                     } else {
                                         // Log.d("ret", "user not created----");
-                                        tvLoginMessage.setText("Login is used.");
+                                        tvLoginMessage.setText(response.body().getMessage());
                                     }
                                 } else {
                                     // Log.d("ret", "-----isFalse-----");
@@ -200,7 +203,17 @@ public class FragmentProfileSignInUp extends Fragment {
                         });
                     }
                     else {
-                        tvLoginMessage.setText("Password mismatch.");
+                        if(etLogin.length() < 4){
+                            tvLoginMessage.setText("Login is short.");
+
+                        }
+                        else {
+                            if(etPassword.length() < 8)
+                                tvLoginMessage.setText("Password is short.");
+                            else
+                                tvLoginMessage.setText("Password mismatch.");
+                        }
+
                     }
                 }
                 // Log.d("ret",myPreferences.getString("jwt", "unknown"));
