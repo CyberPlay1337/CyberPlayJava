@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/pumDust2"
+        android:title="Dust 2"/>
+    <item
+        android:id="@+id/pumInferno"
+        android:title="Inferno"/>
+    <item
+        android:id="@+id/pumMirage"
+        android:title="Mirage"/>
+    <item
+        android:id="@+id/pumAncient"
+        android:title="Ancient"/>
+    <item
+        android:id="@+id/pumOverpass"
+        android:title="Overpass"/>
+    <item
+        android:id="@+id/pumVertigo"
+        android:title="Vertigo"/>
+    <item
+        android:id="@+id/pumNuke"
+        android:title="Nuke"/>
+
+</menu>

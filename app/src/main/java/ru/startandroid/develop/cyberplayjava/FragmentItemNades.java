@@ -117,11 +117,16 @@ public class FragmentItemNades extends Fragment{
             public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
 
                 List<Message> messages = response.body();
-                for (Message mes : messages)
-                {
-                    // Log.i("Retrofit-add", "Adding");
-                    setInitialData(mes.getId(),mes.getName(),mes.getNadeResource(),mes.getVideoLink());
+                try {
+                    for (Message mes : messages)
+                    {
+                        // Log.i("Retrofit-add", "Adding");
+                        setInitialData(mes.getId(),mes.getName(),mes.getNadeResource(),mes.getVideoLink());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
+
 
                 nadesList = (RecyclerView) root.findViewById(R.id.nadeList);
                 StateNadeAdapter stateAdapter = new StateNadeAdapter(root.getContext(),states);
