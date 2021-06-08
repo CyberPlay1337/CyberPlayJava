@@ -87,7 +87,7 @@ public class FragmentItemNades extends Fragment{
             case "Mirage":
                 call = messagesApi.messagesMirage();
                 break;
-            case "Train":
+            case "Ancient":
                 call = messagesApi.messagesTrain();
                 break;
             case "Overpass":

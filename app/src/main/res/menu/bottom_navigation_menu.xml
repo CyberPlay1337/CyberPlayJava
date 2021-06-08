@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/navigation_nades"
-        android:icon="@drawable/ic_launcher_foreground"
+        android:icon="@drawable/ic_btm_grenade"
         android:title="@string/title_nades" />
 
     <item
         android:id="@+id/navigation_board"
-        android:icon="@drawable/ic_launcher_foreground"
+        android:icon="@drawable/ic_btm_board"
         android:title="@string/title_board" />
 
     <item
         android:id="@+id/navigation_train"
-        android:icon="@drawable/ic_launcher_foreground"
+        android:icon="@drawable/ic_btm_training"
         android:title="@string/title_train" />
 
 </menu>

@@ -82,7 +82,7 @@ public class FragmentNades extends Fragment {
         states.add(new StateMap("Dust 2",  R.drawable.de_dust2));
         states.add(new StateMap("Inferno", R.drawable.de_inferno));
         states.add(new StateMap("Mirage", R.drawable.de_mirage));
-        states.add(new StateMap("Train", R.drawable.de_train));
+        states.add(new StateMap("Ancient", R.drawable.de_ancient));
         states.add(new StateMap("Overpass",  R.drawable.de_overpass));
         states.add(new StateMap("Vertigo",  R.drawable.de_vertigo));
         states.add(new StateMap("Nuke",  R.drawable.de_nuke));

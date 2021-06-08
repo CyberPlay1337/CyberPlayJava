@@ -7,6 +7,12 @@
     tools:context=".FragmentBoard">
 
     <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:id="@+id/boardMap"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/dust2_radar"/>
     <FrameLayout
         android:id="@+id/boardContainer"
         android:layout_width="match_parent"
