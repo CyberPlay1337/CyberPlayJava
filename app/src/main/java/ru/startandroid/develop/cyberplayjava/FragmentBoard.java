@@ -36,26 +36,50 @@ public class FragmentBoard extends Fragment {
         return new FragmentBoard();
     }
 
-    private FrameLayout flcontainer;
+    View selectedView;
 
+    private ImageView boardM;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_board, container, false);
 
+        boardM = root.findViewById(R.id.boardMap);
         FrameLayout flcontainer = (FrameLayout) root.findViewById(R.id.boardContainer);
         FloatingActionButton fab = root.findViewById(R.id.fabAdd);
         Button pubutton = root.findViewById(R.id.popUpMenuBoardBtn);
 
         final boolean[] isRotate = {false};
 
+        FloatingActionButton fabSmoke = root.findViewById(R.id.fabSmoke);
+        ViewAniimation.init(fabSmoke);
+        FloatingActionButton fabMolotov = root.findViewById(R.id.fabMoly);
+        ViewAniimation.init(fabMolotov);
+        FloatingActionButton fabFlash = root.findViewById(R.id.fabFlash);
+        ViewAniimation.init(fabFlash);
+        FloatingActionButton fabPlayer = root.findViewById(R.id.fabPlayer);
+        ViewAniimation.init(fabPlayer);
+        FloatingActionButton fabClear = root.findViewById(R.id.fabClear);
+        ViewAniimation.init(fabClear);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(!isRotate[0])
                 {
-                    createImageView(root,flcontainer);
+                    ViewAniimation.showIn(fabSmoke);
+                    ViewAniimation.showIn(fabMolotov);
+                    ViewAniimation.showIn(fabFlash);
+                    ViewAniimation.showIn(fabPlayer);
+                    ViewAniimation.showIn(fabClear);
+                }
+                else
+                {
+                    ViewAniimation.showOut(fabSmoke);
+                    ViewAniimation.showOut(fabMolotov);
+                    ViewAniimation.showOut(fabFlash);
+                    ViewAniimation.showOut(fabPlayer);
+                    ViewAniimation.showOut(fabClear);
                 }
                 isRotate[0] = ViewAniimation.rotateFab(v,!isRotate[0]);
 
@@ -74,10 +98,41 @@ public class FragmentBoard extends Fragment {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         pubutton.setText(item.getTitle());
-                        return menuItemClicked(item);
+                        return menuItemClicked(item,flcontainer);
                     }
                 });
                 popup.show();
+            }
+        });
+
+        fabSmoke.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createImageView(root,flcontainer,R.drawable.smoke);
+            }
+        });
+        fabMolotov.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createImageView(root,flcontainer,R.drawable.moly);
+            }
+        });
+        fabFlash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createImageView(root,flcontainer,R.drawable.flash);
+            }
+        });
+        fabPlayer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createImageView(root,flcontainer,R.drawable.player);
+            }
+        });
+        fabClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                flcontainer.removeView(selectedView);
             }
         });
 
@@ -85,15 +140,15 @@ public class FragmentBoard extends Fragment {
     }
 
 
-    private void createImageView(View root, FrameLayout frameLayout)
+    private void createImageView(View root, FrameLayout frameLayout,int imgRes)
     {
         //Bitmap bmp = BitmapFactory.decodeFile(@);
         ImageView imageView = new ImageView(root.getContext());
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(250,250);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(88,88);
         params.leftMargin = 0;
         params.rightMargin =0;
         imageView.setLayoutParams(params);
-        imageView.setImageResource(R.drawable.de_dust2);
+        imageView.setImageResource(imgRes);
         imageView.setOnTouchListener(touchListener);
         frameLayout.addView(imageView);
     }
@@ -127,41 +182,42 @@ public class FragmentBoard extends Fragment {
                     break;
                 }
             }
-
+            selectedView = view;
             return true;
         }
     };
 
-    private boolean menuItemClicked(MenuItem item)
+    private boolean menuItemClicked(MenuItem item,FrameLayout frameLayout)
     {
         switch (item.getItemId())
         {
             case R.id.pumDust2:
-
+                boardM.setImageResource(R.drawable.dust2_radar);
                 break;
             case R.id.pumInferno:
-
+                boardM.setImageResource(R.drawable.inferno_radar);
                 break;
             case R.id.pumMirage:
-
+                boardM.setImageResource(R.drawable.mirage_radar);
                 break;
             case R.id.pumAncient:
-
+                boardM.setImageResource(R.drawable.ancient_radar);
                 break;
             case R.id.pumOverpass:
-
+                boardM.setImageResource(R.drawable.overpass_radar);
                 break;
             case R.id.pumVertigo:
-
+                boardM.setImageResource(R.drawable.vertigo_radar);
                 break;
             case R.id.pumNuke:
-
+                boardM.setImageResource(R.drawable.nuke_radar);
                 break;
             default:
-
                 break;
 
         }
+        frameLayout.removeAllViews();
+
         return true;
     }
 }

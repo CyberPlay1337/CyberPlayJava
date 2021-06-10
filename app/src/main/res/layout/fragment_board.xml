@@ -30,6 +30,77 @@
         app:fabSize="normal"
         android:src="@drawable/ic_add"
         />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabClear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_above="@id/fabPlayer"
+        android:layout_alignLeft="@id/fabPlayer"
+
+
+        android:src="@drawable/ic_baseline_delete_forever_24"
+        android:tint="@color/activeColor"
+        app:backgroundTint="@color/white"
+        app:fabSize="mini"
+        app:rippleColor="@color/white" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabPlayer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_above="@id/fabFlash"
+        android:layout_alignLeft="@id/fabFlash"
+
+
+        android:src="@drawable/ic_pcirc"
+        android:tint="@color/activeColor"
+        app:backgroundTint="@color/white"
+        app:fabSize="mini"
+        app:rippleColor="@color/white" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabFlash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_above="@id/fabSmoke"
+        android:layout_alignLeft="@id/fabSmoke"
+
+
+        android:src="@drawable/ic_flashbang"
+        android:tint="@color/activeColor"
+        app:backgroundTint="@color/white"
+        app:fabSize="mini"
+        app:rippleColor="@color/white" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabSmoke"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_above="@id/fabMoly"
+        android:layout_alignLeft="@id/fabMoly"
+
+        android:src="@drawable/ic_smoke"
+        android:tint="@color/activeColor"
+        app:backgroundTint="@color/white"
+        app:fabSize="mini"
+        app:rippleColor="@color/white" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabMoly"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_above="@id/fabAdd"
+        android:layout_alignLeft="@id/fabAdd"
+
+        android:layout_margin="3dp"
+        android:src="@drawable/ic_molotov"
+        android:tint="@color/activeColor"
+        app:backgroundTint="@color/white"
+        app:fabSize="mini"
+        app:rippleColor="@color/white" />
     <Button
         android:id="@+id/popUpMenuBoardBtn"
         android:layout_width="wrap_content"
