@@ -2,8 +2,9 @@ package ru.startandroid.develop.cyberplayjava;
 
 public class StateTraining {
     private String name;
-    private String imgLink;
     private String text;
+    private String imgLink;
+
 
 
     public StateTraining(String name, String imgLink,String text)

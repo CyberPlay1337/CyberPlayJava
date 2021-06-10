@@ -37,10 +37,10 @@ public interface MessagesApi {
     Call<List<Message>> messagesFavNades(@Body ValidateUser key_jwt);
 
 
-    @GET("soloTraining.json")
+    @GET("soloTraining.php")
     Call<List<MessageTraining>> messagesSoloTraining();
 
-    @GET("TeamTraining.json")
+    @GET("teamTraining.php")
     Call<List<MessageTraining>> messagesTeamTraining();
 
     @POST("jwt_login.php")

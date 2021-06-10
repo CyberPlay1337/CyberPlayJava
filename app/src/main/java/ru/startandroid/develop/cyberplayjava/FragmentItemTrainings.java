@@ -80,10 +80,15 @@ public class FragmentItemTrainings extends Fragment {
             public void onResponse(Call<List<MessageTraining>> call, Response<List<MessageTraining>> response) {
 
                 List<MessageTraining> messages = response.body();
-                for (MessageTraining mes : messages)
+                try {
+                    for (MessageTraining mes : messages) {
+                        // Log.i("Retrofit-add", "Adding");
+                        setInitialData(mes.getName(), mes.getTrainResource(), mes.getText());
+                    }
+                }
+                catch (Exception e)
                 {
-                    // Log.i("Retrofit-add", "Adding");
-                    setInitialData(mes.getName(),mes.getImgLink(),mes.getText());
+
                 }
 
                 trainingList = (ListView) root.findViewById(R.id.trainingList);

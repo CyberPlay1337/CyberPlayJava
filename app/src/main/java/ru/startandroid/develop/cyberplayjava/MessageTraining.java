@@ -4,7 +4,7 @@ public class MessageTraining {
     private long id;
     private String name; // название
     private String text;
-    private String imgLink; // ресурс флага
+    private String trainResource; // ресурс флага
 
 
     public long getId() { return this.id;}
@@ -16,6 +16,6 @@ public class MessageTraining {
     public String getText() { return this.text; }
     public void setText(String text) { this.text = text; }
 
-    public String getImgLink() {return this.imgLink;}
-    public void setImgLink(String link) {this.imgLink = link;}
+    public String getTrainResource() {return this.trainResource;}
+    public void setTrainResource(String link) {this.trainResource = link;}
 }

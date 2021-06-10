@@ -124,7 +124,7 @@ public class FragmentItemNades extends Fragment{
                         setInitialData(mes.getId(),mes.getName(),mes.getNadeResource(),mes.getVideoLink());
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    // e.printStackTrace();
                 }
 
 

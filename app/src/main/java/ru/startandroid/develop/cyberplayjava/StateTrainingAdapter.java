@@ -8,6 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 public class StateTrainingAdapter extends ArrayAdapter<StateTraining> {
@@ -29,8 +31,8 @@ public class StateTrainingAdapter extends ArrayAdapter<StateTraining> {
         TextView nameView = (TextView) view.findViewById(R.id.trainingItemTxt);
         ImageView imageView = (ImageView) view.findViewById(R.id.trainingItemImg);
         StateTraining state = states.get(position);
-
-        new DownloadImageTask(imageView).execute(state.getImgLink());
+        Picasso.get().load(state.getImgLink()).into(imageView);
+        // new DownloadImageTask(imageView).execute(state.getImgLink());
 
         //tut Img
         nameView.setText(state.getName());

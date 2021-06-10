@@ -15,6 +15,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 public class FragmentInfoTraining extends Fragment {
@@ -45,7 +47,8 @@ public class FragmentInfoTraining extends Fragment {
         title.setText(stateTraining.getName());
         text.setText(stateTraining.getText());
         ImageView iv = root.findViewById(R.id.titleImg);
-        new DownloadImageTask(iv).execute(stateTraining.getImgLink());
+        // new DownloadImageTask(iv).execute(stateTraining.getImgLink());
+        Picasso.get().load(stateTraining.getImgLink()).into(iv);
 
         return root;
 
