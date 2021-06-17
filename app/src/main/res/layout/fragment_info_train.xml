@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:text="Текст текст текст"
         android:textColor="@color/white"
-        android:textSize="32sp"
+        android:textSize="14sp"
         android:layout_marginTop="15dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         AdRequest adRequest = new AdRequest.Builder().build();
-        InterstitialAd.load(this,"ca-app-pub-3940256099942544/1033173712", adRequest, new InterstitialAdLoadCallback() {
+        InterstitialAd.load(this,"ca-app-pub-6671274120411197/9346886060", adRequest, new InterstitialAdLoadCallback() {
             @Override
             public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
                 // The mInterstitialAd reference will be null until
